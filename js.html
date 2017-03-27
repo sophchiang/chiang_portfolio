@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Web Portfolio: JavaScript Page</title>
+		<link type="text/css" rel="stylesheet" href="_assets/css/mystyle.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Nova+Script">
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Comfortaa">
+		<link rel="shortcut icon" href="_assets/images/favicon.ico"/>	
+		<script>
+		function showAlert(){
+		var myText = "Local Emo for Daisuke Ono";
+		alert (myText);
+		}
+	</script>
+	<script>
+	function updateTime(){
+		//get all parts of current time
+		var now = new Date();
+		var hours = now.getHours();
+		var minutes = now.getMinutes();
+		var seconds = now.getSeconds();
+
+		//add leading zero's to minutes and seconds
+		if (minutes < 10){
+			minutes = '0'+ minutes;
+		}
+		if (seconds < 10){
+			seconds = '0'+ seconds;
+		}
+
+		//get time of day (am or pm)
+		if (hours >= 12 && hours < 24){
+			var timeOfDay = 'pm';
+		}
+		else{
+			var timeOfDay='am';
+		}
+		//convert hours from 24-hour time to 12 hour time
+		if(hours > 12){
+			hours = hours-12
+		}
+
+		//splice them together ito a character string named "currentTime"
+		var currentTime = hours + ':'+ minutes +':' + seconds;
+
+		//get clock div
+		var myClock = document.getElementById('clock');
+
+		//write currentTime string to clock div
+		myClock.innerHTML = currentTime;
+		}
+
+		function toggleClock(){
+			//get clock
+			var myClock = document.getElementById('clock');
+
+			//get current value of clock's display property
+			var displaySetting = myClock.style.display;
+
+			//get clock button so we can change what it says
+			var clockButton = document.getElementById('clockButton');
+
+			//toggle clock and button text depending on current state
+			if (displaySetting =='block'){
+				//clock visible hide it
+				myClock.style.display = 'none';
+				//change button text
+				clockButton.innerHTML = 'Show clock'
+			}
+			else{
+				//clock is hidden show it
+				myClock.style.display = 'block'
+				//change button text
+				clockButton.innerHTML = 'Hide clock';
+			}
+
+		}
+	</script>
+	<script>
+		(function() {
+"use strict";
+
+var state = document.getElementById('s-state');
+
+document.addEventListener('DOMContentLoaded', function() {
+	document.getElementById('cart-humanorgans').addEventListener('submit', estimateTotal);
+	
+	var btnEstimate = document.getElementById('btn-estimate');
+	
+	btnEstimate.disabled = true;
+	
+	state.addEventListener('change', function() {
+	
+		if (state.value === '') {
+			btnEstimate.disabled = true;
+		} else {
+			btnEstimate.disabled = false;
+		}
+	
+	});
+});
+
+function estimateTotal(event) {
+	event.preventDefault();
+	
+	if (state.value === '') {
+		alert('Please choose your shipping state.');
+		
+		state.focus();
+	}
+	
+	var itemBball = parseInt(document.getElementById('lungs')
+							 .value, 10) || 0,
+		itemJersey = parseInt(document.getElementById('hearts')
+							 .value, 10) || 0,
+		itemPower = parseInt(document.getElementById('dakimakura')
+							 .value, 10) || 0,
+		shippingState = state.value,
+		shippingMethod = document.querySelector('[name=r_method]:checked')
+						     .value || "";
+		
+	var totalQty = itemlungs + itemhearts + itemdakimakura, 
+		shippingCostPer,
+		shippingCost,
+		taxFactor = 1,
+		estimate,
+		totalItemPrice = (100 * itemlungs) + (110 * itemhearts) +
+						 (25 * itemdakimakura);
+	
+	if (shippingState === 'CA') {
+		taxFactor = 1.075;
+	} else if (shippingState === 'WA') {
+		taxFactor = 1.065;
+	}
+	
+	shippingCost = shippingCostPer * totalQty;
+		
+	estimate = '$' + ((totalItemPrice * taxFactor).toFixed(2);
+	
+	document.getElementById('txt-estimate').value = estimate;
+	
+	var results = document.getElementById('results');
+	
+	results.innerHTML = 'Total items: ' + totalQty + '<br>';
+	results.innerHTML += 'Tax: ' + ((taxFactor - 1) * 100).toFixed(2) + '% (' + shippingState + ')';
+}
+
+})();
+	</script>
+	</head>
+
+		<nav>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="accessibility.html">Accessibility</a></li>
+				<li><a href="usability.html">Usability</a></li>
+				<li><a href="graphics.html">Graphics</a></li>
+				<li><a href="javascript.html">Javascript</a></li>
+				<li><a href="tools.html">Tools</a></li>
+				<li><a href="video.html">Video</a></li>
+			</ul>
+		</nav>
+
+	<style>
+		div#clock{
+			background-color:#dee8e9;
+			text-align: center;
+			padding: 10px;
+			max-width: 300px;
+			font-size: 40px;
+			font-family:'Nova Script';
+			display: none;
+		}
+	</style>
+	
+	<body onload="setInterval('updateTime()',1000)">
+		<button onclick="showAlert()">Show alert</button>
+		<div id="clock"></div>
+		<button onclick="toggleClock()" id="clockButton">Show clock</button>
+		<nav>
+	<form class="cart" id="cart-humanorgans">
+		<h1>Human Organs and Body Pillows</h1>
+		<div class="item">
+			<h2>Lungs</h2>
+			<p>Need better lungs? We've got lungs that will take your breath away!</p>
+		<div class="info">
+			<span>Price: $100 per lung</span>
+		</div>
+		<div class="order">
+			<label for="lungs">Quntity desired:</label>
+			<input type="number" min="0" id="lungs" size="3" placeholder="0">
+		</div>
+	</div>
+	<div class="item">
+		<h2>Hearts</h2>
+		<p>These hearts will make you go doki doki</p>
+		<div class="info">
+			<span>Price: $110 per heart</span>
+		</div>
+		<div class="order">
+			<label for="hearts">Quantity desired:</label>
+			<input type="number" min="0" id="hearts" size="3" placeholder="0">
+		</div>
+	</div>
+	<div class="item">
+		<h2>Body Pillows</h2>
+		<p>Our body pillow is made of the most comfortable and the most organic materials!</p>
+	<div class="info">
+		<span>Price: $25 body pillow</span>
+	</div>
+	<div class="order">
+		<label for="dakimakura">Quantity desired:</label>
+		<input type="number" min="0" id="dakimakura" size="3" placeholder="0">
+	</div>
+</div>
+<div id="summary">
+	<h2>Estimate Order</h2>
+<div class="group state">
+	<label for="s-state">State(required):</label>
+		<select id="s-state" required> 
+			<option value>-select-</option>
+			<option value="CA">California (7.5% tax)</option>
+			<option value="WA">Washington (6.5% tax)</option>
+			<option value="IL">Illinois</option>
+			<option value="NH">New Hampshire</option>
+			<option value="PA">Pennsylvania</option>
+	</select>
+</div>
+<div class="group special">
+	<label for="c-special-gift">Special Requests:</label>
+	<br>
+	<input type="checkbox" value="YES" name="c-special-gift" id="c-special-gift">
+	<label for="c-special-gift">For a gift</label>
+	<br>
+	<input type="checkbox" value="YES" name="c-special-newsletter" id="c-special-newsletter">
+	<label for="c-special-newsletter">Sign up to our newsletter for special offers</label>
+	<br>
+	<input type="checkbox" value="YES" name="c-special-anon" id="c-special-anon">
+	<label for="c-special-anon">Make your order anonymous (free)</label>
+</div>
+<div class="group info">
+	<label for="txt-info">Additonal Info:</label>
+	<br>
+	<textarea name="txt-info" id="txt-info" rows="2" placeholder="Any additional info (this does not affect estimate)"></textarea>
+</div>
+<div class="group calc">
+	<p>
+		<label for="btn estimate">Click here to estimate:</label>
+		<input type="submit" value="Estimate Total" id="btn-estimate" disabled>
+		<input type="text" id="txt-estimate" placeholder="$0.00">
+	</p>
+	<div id="results"></div>
+</div>
+	</form>
+		</section>
